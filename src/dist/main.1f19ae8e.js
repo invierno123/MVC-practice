@@ -117,84 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"C:/Users/Administrator/AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/bundle-url.js":[function(require,module,exports) {
-var bundleURL = null;
-
-function getBundleURLCached() {
-  if (!bundleURL) {
-    bundleURL = getBundleURL();
-  }
-
-  return bundleURL;
-}
-
-function getBundleURL() {
-  // Attempt to find the URL of the current script and use that as the base URL
-  try {
-    throw new Error();
-  } catch (err) {
-    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
-
-    if (matches) {
-      return getBaseURL(matches[0]);
-    }
-  }
-
-  return '/';
-}
-
-function getBaseURL(url) {
-  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
-}
-
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-},{}],"C:/Users/Administrator/AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/css-loader.js":[function(require,module,exports) {
-var bundle = require('./bundle-url');
-
-function updateLink(link) {
-  var newLink = link.cloneNode();
-
-  newLink.onload = function () {
-    link.remove();
-  };
-
-  newLink.href = link.href.split('?')[0] + '?' + Date.now();
-  link.parentNode.insertBefore(newLink, link.nextSibling);
-}
-
-var cssTimeout = null;
-
-function reloadCSS() {
-  if (cssTimeout) {
-    return;
-  }
-
-  cssTimeout = setTimeout(function () {
-    var links = document.querySelectorAll('link[rel="stylesheet"]');
-
-    for (var i = 0; i < links.length; i++) {
-      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
-        updateLink(links[i]);
-      }
-    }
-
-    cssTimeout = null;
-  }, 50);
-}
-
-module.exports = reloadCSS;
-},{"./bundle-url":"C:/Users/Administrator/AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/bundle-url.js"}],"reset.css":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"_css_loader":"C:/Users/Administrator/AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/css-loader.js"}],"app1.css":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"_css_loader":"C:/Users/Administrator/AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/css-loader.js"}],"C:/Users/Administrator/AppData/Local/Yarn/Data/global/node_modules/process/browser.js":[function(require,module,exports) {
+})({"C:/Users/Administrator/AppData/Local/Yarn/Data/global/node_modules/process/browser.js":[function(require,module,exports) {
 
 // shim for using process in browser
 var process = module.exports = {}; // cached from whatever global is present so that test runners that stub it
@@ -11280,19 +11203,198 @@ if ( typeof noGlobal === "undefined" ) {
 return jQuery;
 } );
 
-},{"process":"C:/Users/Administrator/AppData/Local/Yarn/Data/global/node_modules/process/browser.js"}],"main.js":[function(require,module,exports) {
+},{"process":"C:/Users/Administrator/AppData/Local/Yarn/Data/global/node_modules/process/browser.js"}],"app1.js":[function(require,module,exports) {
 "use strict";
-
-require("./reset.css");
-
-require("./app1.css");
 
 var _jquery = _interopRequireDefault(require("jquery"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-console.log(_jquery.default);
-},{"./reset.css":"reset.css","./app1.css":"app1.css","jquery":"../node_modules/jquery/dist/jquery.js"}],"C:/Users/Administrator/AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+var $button1 = (0, _jquery.default)('#add');
+var $button2 = (0, _jquery.default)('#minus');
+var $button3 = (0, _jquery.default)('#mul');
+var $button4 = (0, _jquery.default)('#divide');
+var $value = (0, _jquery.default)('#value');
+var m = localStorage.getItem('m');
+$value.text(m || 100);
+var n = parseInt($value.text());
+
+var fn = function fn() {
+  localStorage.setItem('m', n);
+  $value.text(n);
+};
+
+$button1.on('click', function () {
+  n += 1;
+  fn();
+});
+$button2.on('click', function () {
+  n -= 1;
+  fn();
+});
+$button3.on('click', function () {
+  n *= 2;
+  fn();
+});
+$button4.on('click', function () {
+  n /= 2;
+  fn();
+});
+},{"jquery":"../node_modules/jquery/dist/jquery.js"}],"C:/Users/Administrator/AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
+
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
+
+  return bundleURL;
+}
+
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"C:/Users/Administrator/AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+
+  newLink.onload = function () {
+    link.remove();
+  };
+
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+
+    cssTimeout = null;
+  }, 50);
+}
+
+module.exports = reloadCSS;
+},{"./bundle-url":"C:/Users/Administrator/AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/bundle-url.js"}],"app2.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"C:/Users/Administrator/AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/css-loader.js"}],"app2.js":[function(require,module,exports) {
+"use strict";
+
+require("./app2.css");
+
+var _jquery = _interopRequireDefault(require("jquery"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var $tabBar = (0, _jquery.default)("#app2 #table-bar");
+var $tabContent = (0, _jquery.default)("#app2 #table-content");
+$tabBar.on("click", "li", function (e) {
+  var $li = (0, _jquery.default)(e.currentTarget);
+  $li.addClass("selected").siblings().removeClass("selected");
+  var index = $li.index();
+  $tabContent.children().eq(index).addClass('active').siblings().removeClass('active'); // 不要用.css或者.show()和.hide()来实现，
+  // 通过样式与形式分离来实现，方便以后的更改。
+});
+$tabBar.children().eq(0).trigger('click');
+},{"./app2.css":"app2.css","jquery":"../node_modules/jquery/dist/jquery.js"}],"app3.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"C:/Users/Administrator/AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/css-loader.js"}],"app3.js":[function(require,module,exports) {
+"use strict";
+
+require("./app3.css");
+
+var _jquery = _interopRequireDefault(require("jquery"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var $square = (0, _jquery.default)('#app3 .square');
+$square.on('click', function () {
+  $square.toggleClass('active'); // 如果没有就添加，有就删掉。
+});
+},{"./app3.css":"app3.css","jquery":"../node_modules/jquery/dist/jquery.js"}],"app4.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"C:/Users/Administrator/AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/css-loader.js"}],"app4.js":[function(require,module,exports) {
+"use strict";
+
+require("./app4.css");
+
+var _jquery = _interopRequireDefault(require("jquery"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var $circle = (0, _jquery.default)('#app4 .circle');
+$circle.on('mouseenter', function () {
+  $circle.addClass('active');
+}).on('mouseleave', function () {
+  $circle.removeClass('active');
+});
+},{"./app4.css":"app4.css","jquery":"../node_modules/jquery/dist/jquery.js"}],"global.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"C:/Users/Administrator/AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/css-loader.js"}],"../node_modules/reset.css/reset.css":[function(require,module,exports) {
+
+        var reloadCSS = require('_css_loader');
+        module.hot.dispose(reloadCSS);
+        module.hot.accept(reloadCSS);
+      
+},{"_css_loader":"C:/Users/Administrator/AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/css-loader.js"}],"main.js":[function(require,module,exports) {
+"use strict";
+
+require("./app1.js");
+
+require("./app2.js");
+
+require("./app3.js");
+
+require("./app4.js");
+
+require("./global.css");
+
+require("reset.css");
+},{"./app1.js":"app1.js","./app2.js":"app2.js","./app3.js":"app3.js","./app4.js":"app4.js","./global.css":"global.css","reset.css":"../node_modules/reset.css/reset.css"}],"C:/Users/Administrator/AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -11320,7 +11422,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "4079" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "16741" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
