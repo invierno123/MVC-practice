@@ -12,7 +12,7 @@ index:parseInt(localStorage.getItem('app2.index'))||0
   update(data){
       Object.assign(m.data,data)
       eventsBus.trigger('m:updated')
-      localStorage.setItem('index', m.data.index)
+      localStorage.setItem('app2.index', m.data.index)
   },
   get(){}
 }
