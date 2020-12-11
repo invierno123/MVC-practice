@@ -6,7 +6,7 @@ const eventsBus=$(window)
 const m={
     data:{
 //初始化数据
-m:parseInt(localStorage.getItem('m'))
+m:parseFloat(localStorage.getItem('m'))
     },
     create(){},
     delete(){},
