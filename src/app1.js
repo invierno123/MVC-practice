@@ -13,7 +13,7 @@ m:parseInt(localStorage.getItem('m'))
     update(data){
         Object.assign(m.data,data)
         eventsBus.trigger('m:updated')
-        localStorage.setItem('m',m.data.m)
+        localStorage.setItem('m',m.data.m.toString())
     },
     get(){}
 }
